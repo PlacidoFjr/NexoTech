@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NexoTech Consultoria oferece soluções de TI estratégicas para novos escritórios, incluindo análise de necessidades, infraestrutura, equipamentos e suporte contínuo.">
+    <meta name="keywords" content="consultoria TI, infraestrutura tecnológica, escritórios, análise de necessidades, equipamentos, suporte técnico">
+    <meta name="author" content="NexoTech Consultoria">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="NexoTech Consultoria: TI Estratégica para Novos Escritórios">
+    <meta property="og:description" content="Soluções de TI personalizadas para o sucesso do seu novo escritório.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nexotech.com.br">
+    <meta property="og:image" content="https://nexotech.com.br/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Chosen Palette: Warm Neutrals & Professional Blue -->
+    <!-- Application Structure Plan: The SPA follows a problem-solution-benefit user flow. It starts with 'The Challenge' (interactive cards), moves to 'Our Services' (a tabbed/interactive section featuring a chart linking problems to solutions), highlights the 'Benefits' (icon cards), and ends with a clear 'Contact' call-to-action. A sticky navigation bar allows direct access to each section. This structure was chosen to guide the user through a logical narrative that demonstrates value, making it more persuasive and easier to digest than a linear document. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Challenges & Services -> Goal: Show Relationship -> Viz/Presentation: Interactive Horizontal Bar Chart -> Interaction: Clicking a challenge bar highlights the corresponding service -> Justification: Visually connects problems to solutions, demonstrating the core value proposition interactively. -> Library: Chart.js/Canvas.
+        - Report Info: Detailed Services -> Goal: Organize & Inform -> Viz/Presentation: Interactive card layout -> Interaction: Clicking a service card reveals its details -> Justification: Breaks down dense information into manageable, user-triggered chunks, preventing overload. -> Library: Vanilla JS + Tailwind.
+        - Report Info: Benefits -> Goal: Reinforce Value -> Viz/Presentation: Icon-based cards -> Interaction: Subtle hover effects -> Justification: Scannable, visually appealing, and memorable presentation of key advantages. -> Library: Tailwind + Unicode Icons.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <title>NexoTech Consultoria: TI Estratégica para Novos Escritórios</title>
+    <!-- Modifique as tags de script existentes -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Script do EmailJS -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Inicialização do EmailJS com seu User ID
+            // Você precisará substituir pelo seu User ID real
+            emailjs.init("YOUR_USER_ID");
+        })();
+    </script>
+    <!-- Adicione após a div tech-background -->
+    <div class="fixed bottom-4 right-4 z-10 bg-white/80 backdrop-blur-sm rounded-full p-2 shadow-md" id="toggle-animation">
+        <button class="text-blue-600 focus:outline-none" title="Ativar/Desativar animação de fundo">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        </button>
+    </div>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Na seção de serviços, remova este trecho se existir -->
+    <div class="tech-background">
+        <canvas id="tech-canvas"></canvas>
+    </div>
+    
+    <header class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">Nexo<span class="text-slate-700">Tech</span></a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#desafio" class="text-slate-600 hover:text-blue-600 transition-colors duration-300 font-medium">O Desafio</a>
+                <a href="#servicos" class="text-slate-600 hover:text-blue-600 transition-colors duration-300 font-medium">Nossos Serviços</a>
+                <a href="#beneficios" class="text-slate-600 hover:text-blue-600 transition-colors duration-300 font-medium">Benefícios</a>
+                <a href="#contato" class="text-slate-600 hover:text-blue-600 transition-colors duration-300 font-medium">Contato</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-slate-600 focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full left-0 top-full">
+            <a href="#desafio" class="block px-6 py-3 text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300">O Desafio</a>
+            <a href="#servicos" class="block px-6 py-3 text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300">Nossos Serviços</a>
+            <a href="#beneficios" class="block px-6 py-3 text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300">Benefícios</a>
+            <a href="#contato" class="block px-6 py-3 text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300">Contato</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+
+        <section id="hero" class="text-center py-20 md:py-32 bg-gradient-to-br from-slate-50 to-blue-100 rounded-b-3xl -mx-6 px-6 animate-on-scroll">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">Potencialize Seu Novo Escritório com a <span class="text-blue-600">NexoTech</span></h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8">Transformamos a tecnologia numa vantagem competitiva para o seu negócio, com soluções de TI estratégicas, seguras e sob medida.</p>
+            <a href="#servicos" class="bg-blue-600 text-white font-semibold py-3 px-10 rounded-lg text-lg hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">Descubra Nossas Soluções</a>
+        </section>
+
+        <section id="desafio" class="py-16 md:py-24 scroll-mt-20 animate-on-scroll">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">O Desafio: Armadilhas Comuns</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Muitos escritórios em arranque enfrentam obstáculos tecnológicos. Identifique os riscos e veja como a NexoTech pode ajudar.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="challenge-card bg-white p-6 rounded-xl shadow-lg transition-all duration-300">
+                    <h3 class="font-semibold text-xl mb-3 text-red-500"><span class="mr-2">💸</span>Aquisições Inadequadas</h3>
+                    <p class="text-slate-600 text-sm">Custos desnecessários com equipamentos sobredimensionados ou frustração com máquinas de baixo desempenho.</p>
+                </div>
+                <div class="challenge-card bg-white p-6 rounded-xl shadow-lg transition-all duration-300">
+                    <h3 class="font-semibold text-xl mb-3 text-red-500"><span class="mr-2">🔌</span>Falta de Planeamento de Rede</h3>
+                    <p class="text-slate-600 text-sm">Conectividade lenta, falhas constantes e vulnerabilidades de segurança que paralisam a operação.</p>
+                </div>
+                <div class="challenge-card bg-white p-6 rounded-xl shadow-lg transition-all duration-300">
+                    <h3 class="font-semibold text-xl mb-3 text-red-500"><span class="mr-2">🛡️</span>Segurança Negligenciada</h3>
+                    <p class="text-slate-600 text-sm">Risco elevado de perda de dados críticos e exposição a ciberataques por falta de backups e firewalls.</p>
+                </div>
+                <div class="challenge-card bg-white p-6 rounded-xl shadow-lg transition-all duration-300">
+                    <h3 class="font-semibold text-xl mb-3 text-red-500"><span class="mr-2">🧩</span>Incompatibilidade Geral</h3>
+                    <p class="text-slate-600 text-sm">Problemas de fluxo de trabalho causados por software e hardware que não se integram corretamente.</p>
+                </div>
+                <div class="challenge-card bg-white p-6 rounded-xl shadow-lg transition-all duration-300">
+                    <h3 class="font-semibold text-xl mb-3 text-red-500"><span class="mr-2">👻</span>Custos Ocultos</h3>
+                    <p class="text-slate-600 text-sm">Gastos imprevistos com manutenções urgentes e perda de produtividade devido a falhas constantes.</p>
+                </div>
+                <div class="challenge-card bg-white p-6 rounded-xl shadow-lg transition-all duration-300">
+                    <h3 class="font-semibold text-xl mb-3 text-red-500"><span class="mr-2">🧱</span>Falta de Escalabilidade</h3>
+                    <p class="text-slate-600 text-sm">Soluções que não acompanham o crescimento da empresa, exigindo reinvestimentos prematuros.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicos" class="py-16 md:py-24 scroll-mt-20 bg-slate-100 -mx-6 px-6 rounded-3xl animate-on-scroll">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">A Solução: Nossos Serviços Especializados</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Oferecemos um portfólio completo para construir a sua infraestrutura ideal. Clique num desafio no gráfico para ver o serviço que o soluciona.</p>
+            </div>
+
+            <div class="chart-container mb-12 md:mb-16">
+                <canvas id="challenges-chart"></canvas>
+            </div>
+            
+            <div id="services-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="service-card bg-white p-6 rounded-xl shadow-lg border-2 border-transparent transition-all duration-300" data-service-id="1">
+                    <h3 class="font-semibold text-xl mb-3 text-blue-600"><span class="mr-2">🔍</span>Análise de Necessidades</h3>
+                    <p class="text-slate-600 text-sm">Mapeamento de perfis, levantamento de requisitos de software e hardware para uma base sólida.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-lg border-2 border-transparent transition-all duration-300" data-service-id="2">
+                    <h3 class="font-semibold text-xl mb-3 text-blue-600"><span class="mr-2">💻</span>Recomendação de Equipamentos</h3>
+                    <p class="text-slate-600 text-sm">Seleção otimizada de CPU, RAM, SSD, monitores e periféricos para máxima produtividade.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-lg border-2 border-transparent transition-all duration-300" data-service-id="3">
+                    <h3 class="font-semibold text-xl mb-3 text-blue-600"><span class="mr-2">🌐</span>Planeamento de Infraestrutura</h3>
+                    <p class="text-slate-600 text-sm">Arquitetura completa de rede, configuração de Wi-Fi de alta velocidade, sistemas de backup automatizados, e implementação de soluções de segurança avançadas para proteger seus dados e garantir continuidade operacional.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-lg border-2 border-transparent transition-all duration-300" data-service-id="4">
+                    <h3 class="font-semibold text-xl mb-3 text-blue-600"><span class="mr-2">🔧</span>Montagem Personalizada</h3>
+                    <p class="text-slate-600 text-sm">(Opcional) Montagem de máquinas sob medida com testes rigorosos de performance e estabilidade.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-lg border-2 border-transparent transition-all duration-300" data-service-id="5">
+                    <h3 class="font-semibold text-xl mb-3 text-blue-600"><span class="mr-2">📄</span>Relatório Técnico Final</h3>
+                    <p class="text-slate-600 text-sm">Documentação completa, justificativas técnicas e orientações de uso e manutenção para o futuro.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-lg border-2 border-transparent transition-all duration-300" data-service-id="6">
+                    <h3 class="font-semibold text-xl text-blue-600"><span class="mr-2">🤝</span>Suporte Contínuo</h3>
+                    <p class="text-slate-600 text-sm">Planos de suporte técnico para garantir manutenção, resolução de problemas e atualizações.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="beneficios" class="py-16 md:py-24 scroll-mt-20 animate-on-scroll">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Seus Benefícios Diretos</h2>
+                 <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Investir em TI estratégica com a NexoTech traduz-se em vantagens competitivas claras para o seu negócio.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                <div class="text-center p-6 group">
+                    <span class="text-5xl text-blue-500 inline-block group-hover:scale-110 group-hover:rotate-[-5deg] transition-transform duration-300 ease-in-out mb-3">💰</span>
+                    <h3 class="font-semibold text-xl my-2">Otimização de Custos</h3>
+                    <p class="text-slate-600 text-sm">Evite gastos desnecessários e reduza custos a longo prazo com uma infraestrutura bem planeada.</p>
+                </div>
+                <div class="text-center p-6 group">
+                    <span class="text-5xl text-blue-500 inline-block group-hover:scale-110 group-hover:rotate-[5deg] transition-transform duration-300 ease-in-out mb-3">🚀</span>
+                    <h3 class="font-semibold text-xl my-2">Aumento da Produtividade</h3>
+                    <p class="text-slate-600 text-sm">Colaboradores mais eficientes e satisfeitos com equipamentos e sistemas adequados às suas funções.</p>
+                </div>
+                <div class="text-center p-6 group">
+                    <span class="text-5xl text-blue-500 inline-block group-hover:scale-110 group-hover:rotate-[-5deg] transition-transform duration-300 ease-in-out mb-3">🛡️</span>
+                    <h3 class="font-semibold text-xl my-2">Segurança Reforçada</h3>
+                    <p class="text-slate-600 text-sm">Proteja seus dados valiosos e a continuidade do seu negócio com soluções de segurança robustas.</p>
+                </div>
+                <div class="text-center p-6 group">
+                    <span class="text-5xl text-blue-500 inline-block group-hover:scale-110 group-hover:rotate-[5deg] transition-transform duration-300 ease-in-out mb-3">📈</span>
+                    <h3 class="font-semibold text-xl my-2">Escalabilidade Garantida</h3>
+                    <p class="text-slate-600 text-sm">Uma base tecnológica preparada para acompanhar o crescimento da sua empresa sem grandes disrupções.</p>
+                </div>
+                <div class="text-center p-6 group">
+                    <span class="text-5xl text-blue-500 inline-block group-hover:scale-110 group-hover:rotate-[-5deg] transition-transform duration-300 ease-in-out mb-3">🎯</span>
+                    <h3 class="font-semibold text-xl my-2">Foco no Seu Negócio</h3>
+                    <p class="text-slate-600 text-sm">Deixe a complexidade da TI connosco e concentre-se no que faz de melhor: gerir e expandir o seu negócio.</p>
+                </div>
+                <div class="text-center p-6 group">
+                    <span class="text-5xl text-blue-500 inline-block group-hover:scale-110 group-hover:rotate-[5deg] transition-transform duration-300 ease-in-out mb-3">💡</span>
+                    <h3 class="font-semibold text-xl my-2">Decisão Informada</h3>
+                    <p class="text-slate-600 text-sm">Receba aconselhamento especializado para tomar as melhores decisões tecnológicas para o seu futuro.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-16 md:py-24 scroll-mt-20 animate-on-scroll">
+             <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-xl p-8 md:p-12 lg:p-16 text-white">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold">Pronto para Começar a Transformação Digital?</h2>
+                    <p class="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">Vamos conversar sobre como a NexoTech pode construir a base tecnológica para o sucesso do seu novo escritório. O primeiro passo é simples.</p>
+      
+                    <a href="https://wa.me/5571999195766?text=Olá! Tenho interesse em consultoria de TI para meu escritório." class="contact-button mt-10 inline-block bg-white text-blue-600 font-bold py-4 px-10 rounded-lg text-lg hover:bg-slate-100 transition-colors duration-300 shadow-md">Agende uma Conversa Estratégica <span class="ml-2">📱</span></a>
+                    
+                    <p class="mt-6 text-blue-100">Ou preencha o formulário abaixo:</p>
+                    
+                    <form id="contact-form" class="mt-6 max-w-lg mx-auto text-left bg-white/10 backdrop-blur-sm p-6 rounded-xl">
+                        <div class="mb-4">
+                            <label for="name" class="block text-blue-100 mb-2 text-sm font-medium">Nome</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg bg-white/80 text-blue-900 focus:outline-none focus:ring-2 focus:ring-white" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-blue-100 mb-2 text-sm font-medium">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg bg-white/80 text-blue-900 focus:outline-none focus:ring-2 focus:ring-white" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="phone" class="block text-blue-100 mb-2 text-sm font-medium">Telefone</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 rounded-lg bg-white/80 text-blue-900 focus:outline-none focus:ring-2 focus:ring-white">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-blue-100 mb-2 text-sm font-medium">Mensagem</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded-lg bg-white/80 text-blue-900 focus:outline-none focus:ring-2 focus:ring-white" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-blue-50 transition-colors duration-300 shadow-md">Enviar Mensagem</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 NexoTech Consultoria. Todos os direitos reservados.</p>
+            <p class="text-sm mt-1">Construindo o futuro tecnológico do seu negócio.</p>
+        </div>
+    </footer>
+
+    <!-- Adicionar EmailJS SDK antes do script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("3hJVCbwQwqXVfEjM2"); // Sua Public Key do EmailJS
+        })();
+    </script>
+    
+    <!-- Referência ao arquivo JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
